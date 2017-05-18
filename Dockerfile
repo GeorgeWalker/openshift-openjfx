@@ -46,7 +46,7 @@ COPY ./contrib/settings.xml $HOME/.m2/
 
 RUN wget https://chriswhocodes.com/downloads/openjfx-8u60-sdk-overlay-linux-amd64.zip
 # extract the archive to /usr/lib/jvm/java-1.8.0
-RUN unzip openjfx-8u60-sdk-overlay-linux-amd64.zip -d $JAVA_HOME
+RUN unzip openjfx-8u60-sdk-overlay-linux-amd64.zip -d /usr/lib/jvm/java-1.8.0
 
 RUN ls
 
