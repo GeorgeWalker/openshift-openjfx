@@ -42,6 +42,21 @@ LABEL io.k8s.description="Platform for building Java (fatjar) applications with 
 # COPY Additional files,configurations that we want to ship by default, like a default setting.xml
 COPY ./contrib/settings.xml $HOME/.m2/
 
+# build Open JFX
+
+yum install mercurial bison flex gperf ksh pkgconfig \
+    libpng12-devel libjpeg-devel libxml2-devel \
+    libxslt-devel systemd-devel glib2-devel  gtk2-devel \
+    libXtst-devel pango-devel freetype-devel
+
+RUN INSTALL_PKGS="tar mercurial bison flex gperf ksh pkgconfig libpng12-devel libjpeg-devel libxml2-devel  libxslt-devel systemd-devel glib2-devel gtk2-devel libXtst-devel pango-devel freetype-devel" && \
+    yum install -y --enablerepo=centosplus $INSTALL_PKGS && \
+    rpm -V $INSTALL_PKGS && \
+    yum clean all -y && \
+	
+RUN hg clone http://hg.openjdk.java.net/openjfx/8u-dev/rt
+
+
 LABEL io.openshift.s2i.scripts-url=image:///usr/local/sti
 COPY ./sti/bin/ /usr/local/sti
 
