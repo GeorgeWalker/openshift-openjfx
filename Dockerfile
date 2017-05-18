@@ -44,11 +44,6 @@ COPY ./contrib/settings.xml $HOME/.m2/
 
 # build Open JFX
 
-yum install mercurial bison flex gperf ksh pkgconfig \
-    libpng12-devel libjpeg-devel libxml2-devel \
-    libxslt-devel systemd-devel glib2-devel  gtk2-devel \
-    libXtst-devel pango-devel freetype-devel
-
 RUN INSTALL_PKGS="tar mercurial bison flex gperf ksh pkgconfig libpng12-devel libjpeg-devel libxml2-devel  libxslt-devel systemd-devel glib2-devel gtk2-devel libXtst-devel pango-devel freetype-devel" && \
     yum install -y --enablerepo=centosplus $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
