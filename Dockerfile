@@ -54,6 +54,11 @@ RUN hg clone http://hg.openjdk.java.net/openjfx/8u-dev/rt
 RUN cd rt && \
     gradle sdk
 
+RUN INSTALL_PKGS="ant" && \
+    yum install -y --enablerepo=centosplus $INSTALL_PKGS && \
+    rpm -V $INSTALL_PKGS && \
+    yum clean all -y 
+
 RUN cd rt && \
     gradle zips 
 
