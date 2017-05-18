@@ -53,7 +53,7 @@ RUN INSTALL_PKGS="ant tar mercurial bison flex gperf ksh pkgconfig libpng12-deve
 RUN hg clone http://hg.openjdk.java.net/openjfx/8/master/rt/
 
 RUN cd rt && \
-    gradle sdk -x :buildSrc:test 
+    gradle sdk  
 
 RUN cd rt && ls
 
