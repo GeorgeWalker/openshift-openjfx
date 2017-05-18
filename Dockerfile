@@ -51,8 +51,9 @@ RUN INSTALL_PKGS="tar mercurial bison flex gperf ksh pkgconfig libpng12-devel li
 	
 RUN hg clone http://hg.openjdk.java.net/openjfx/8u-dev/rt
 
-RUN cd rt/src
-RUN gradle sdk
+RUN cd rt
+RUN ls
+RUN gradle assemble
 
 LABEL io.openshift.s2i.scripts-url=image:///usr/local/sti
 COPY ./sti/bin/ /usr/local/sti
