@@ -44,23 +44,9 @@ COPY ./contrib/settings.xml $HOME/.m2/
 
 # build Open JFX
 
-RUN INSTALL_PKGS="ant tar mercurial bison flex gperf ksh pkgconfig libpng12-devel libjpeg-turbo-devel libxml2-devel  libxslt-devel systemd-devel glib2-devel gtk2-devel libXtst-devel pango-devel freetype-devel" && \
-    yum install -y --enablerepo=centosplus $INSTALL_PKGS && \
-    rpm -V $INSTALL_PKGS && \
-    yum clean all -y 
-	
-#RUN hg clone http://hg.openjdk.java.net/openjfx/8u-dev/rt
-RUN hg clone http://hg.openjdk.java.net/openjfx/8/master/rt/
+RUN wget https://chriswhocodes.com/downloads/openjfx-8u60-sdk-overlay-linux-amd64.zip
 
-RUN cd rt && \
-    gradle sdk  
-
-RUN cd rt && ls
-
-RUN cd rt && \
-    gradle zips 
-
-RUN cd rt && ls
+RUN unzip openjfx-8u60-sdk-overlay-linux-amd64.zip $JAVA_HOME
 
 LABEL io.openshift.s2i.scripts-url=image:///usr/local/sti
 COPY ./sti/bin/ /usr/local/sti
