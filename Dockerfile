@@ -55,9 +55,9 @@ RUN cd rt && \
     gradle sdk
 
 RUN cd rt && \
-    gradle zips \
-    ls
+    gradle zips 
 
+RUN cd rt && ls
 
 LABEL io.openshift.s2i.scripts-url=image:///usr/local/sti
 COPY ./sti/bin/ /usr/local/sti
