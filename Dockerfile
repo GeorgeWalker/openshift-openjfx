@@ -49,9 +49,8 @@ RUN INSTALL_PKGS="ant tar mercurial bison flex gperf ksh pkgconfig libpng12-deve
     rpm -V $INSTALL_PKGS && \
     yum clean all -y 
 	
-RUN hg clone http://hg.openjdk.java.net/openjfx/8u-dev/rt
-
-RUN rpm -ivh ftp://195.220.108.108/linux/mageia/distrib/5/x86_64/media/core/backports_testing/java-1.8.0-openjfx-1.8.0.131-1.b11.1.mga5.x86_64.rpm
+#RUN hg clone http://hg.openjdk.java.net/openjfx/8u-dev/rt
+RUN hg clone http://hg.openjdk.java.net/openjfx/8/master/rt/
 
 RUN cd rt && \
     gradle sdk -x :buildSrc:test 
