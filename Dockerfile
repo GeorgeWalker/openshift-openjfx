@@ -7,7 +7,7 @@ MAINTAINER Jorge Morales <jmorales@redhat.com>
 # Java jdk 8, Maven 3.3, Gradle 2.6
 RUN INSTALL_PKGS="tar unzip bc which lsof java-1.8.0-openjdk java-1.8.0-openjdk-devel" && \
     yum install -y --enablerepo=centosplus $INSTALL_PKGS && \
-    yum install -y --enablerepo=centosplus openjfx && \
+    yum install -y --enablerepo=centosplus java-1.8.0-openjfx && \
     rpm -V $INSTALL_PKGS && \
     yum clean all -y && \
     mkdir -p /opt/openshift && \
