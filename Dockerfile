@@ -49,9 +49,7 @@ RUN wget https://chriswhocodes.com/downloads/openjfx-8u60-sdk-overlay-linux-amd6
 RUN unzip openjfx-8u60-sdk-overlay-linux-amd64.zip -d /usr/lib/jvm/java-1.8.0
 
 # X11
-RUN INSTALL_PKGS="xorg-x11-server-Xorg" && \
-    yum install -y --enablerepo=centosplus $INSTALL_PKGS && \
-    rpm -V $INSTALL_PKGS && \
+RUN yum install -y --enablerepo=centosplus groupinstall "X Window System" "Desktop" && \
     yum clean all -y
 
 LABEL io.openshift.s2i.scripts-url=image:///usr/local/sti
