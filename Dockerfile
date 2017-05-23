@@ -71,7 +71,7 @@ COPY ./sti/bin/ /usr/local/sti
 RUN chown -R 1001:1001 /opt/openshift
 
 
-RUN chown -R 1001:0 /wildfly && chown -R 1001:0 $HOME && \
+RUN chown -R 1001:1001 /wildfly && \
     chmod -R ug+rw /wildfly && \
     chmod -R g+rw /opt/s2i/destination
 
