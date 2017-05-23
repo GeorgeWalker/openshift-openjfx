@@ -48,11 +48,22 @@ RUN wget https://chriswhocodes.com/downloads/openjfx-8u60-sdk-overlay-linux-amd6
 # extract the archive to /usr/lib/jvm/java-1.8.0
 RUN unzip openjfx-8u60-sdk-overlay-linux-amd64.zip -d /usr/lib/jvm/java-1.8.0
 
-# X11
+# Install X11
 RUN INSTALL_PKGS="xorg-x11-server-Xvfb" && \
     yum install -y --enablerepo=centosplus $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
     yum clean all -y
+	
+# Install Wildfly 10
+ENV WILDFLY_VERSION=10.1.0.Final
+RUN mkdir -p /wildfly && \
+    (curl -v https://download.jboss.org/wildfly/$WILDFLY_VERSION/wildfly-$WILDFLY_VERSION.tar.gz | tar -zx --strip-components=1 -C /wildfly) && \
+    mkdir -p /opt/s2i/destination
+
+# Add s2i wildfly customizations
+ADD ./contrib/wfmodules/ /wildfly/modules/
+ADD ./contrib/wfbin/standalone.conf /wildfly/bin/standalone.conf
+ADD ./contrib/wfcfg/standalone.xml /wildfly/standalone/configuration/standalone.xml	
 
 LABEL io.openshift.s2i.scripts-url=image:///usr/local/sti
 COPY ./sti/bin/ /usr/local/sti
