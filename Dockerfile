@@ -70,8 +70,10 @@ COPY ./sti/bin/ /usr/local/sti
 
 RUN chown -R 1001:1001 /opt/openshift
 
+RUN mkdir -p /wildfly/standalone/log
+RUN mkdir -p /wildfly/standalone/data
 
-RUN chown -R 1001:1001 /wildfly && \
+RUN chown -R 1001:0 /wildfly && \
     chmod -R ug+rw /wildfly && \
     chmod -R g+rw /opt/s2i/destination
 
