@@ -45,7 +45,7 @@ if [ -f "$LOCAL_SOURCE_DIR/pom.xml" ]; then
 
   pushd $LOCAL_SOURCE_DIR &> /dev/null
 
-  MAVEN_ARGS=${MAVEN_ARGS--e -Popenshift -DskipTests -Dcom.redhat.xpaas.repo.redhatga package}
+  MAVEN_ARGS=${MAVEN_ARGS--e -DskipTests -Dcom.redhat.xpaas.repo.redhatga package}
 
   # Always force IPv4 (CLOUD-188)
   # Append user-supplied arguments (CLOUD-412)
@@ -113,19 +113,6 @@ else
   ARTIFACT_DIR=${ARTIFACT_DIR:-.}
 
   copy_artifacts "$ARTIFACT_DIR" jar
-fi
-
-# As Microservices you should only have 1 fat jar
-# if compgen -G "/tmp/src/*" >/dev/null; then
-# TODO: Review how best move these
-if [ $(ls ${DEPLOY_DIR}/*${APP_SUFFIX}.jar | wc -l) -eq 1 ]; then
-  echo "[INFO] Copying ${DEPLOY_DIR}/*${APP_SUFFIX}.jar into ${DEPLOY_DIR}/app.jar"
-  cp ${DEPLOY_DIR}/*${APP_SUFFIX}.jar ${DEPLOY_DIR}/app.jar
-  [ ! -f ${DEPLOY_DIR}/app.jar ] && echo "Application could not be properly built." && exit 1
-  echo "[INFO] Application jar file is located in ${DEPLOY_DIR}/app.jar"
-else
-  echo "[ERROR] No app.jar file located in ${DEPLOY_DIR}"
-  exit 1
 fi
 
 exit 0
